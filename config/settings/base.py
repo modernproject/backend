@@ -198,10 +198,10 @@ OLD_PASSWORD_FIELD_ENABLED = True
 # Email Settings
 DEFAULT_FROM_EMAIL = 'djstein@ncsu.edu'
 ACCOUNT_EMAIL_SUBJECT_PREFIX = '[Modern Project] '
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_VERIFICATION = 'optional'
 # TURN ON WHEN SSL SET UP ACCOUNT_DEFAULT_HTTP_PROTOCOL = True
 
 JWT_AUTH = {
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=300)
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=3000)
 }
 
