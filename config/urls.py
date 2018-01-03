@@ -15,4 +15,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('verify_token/', verify_jwt_token),
     path('', include('project.users.urls')),
+    path('', include('project.api_registration.urls')),
 ]

@@ -51,10 +51,9 @@ THIRD_PARTY_APPS = (
 )
 
 LOCAL_APPS = (
-    'project.emails',
-    'project.payments',
     'project.users',
-    'project.posts'
+    'project.posts',
+    'project.api_registration'
 )
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
