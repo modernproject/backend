@@ -16,13 +16,10 @@ ROOT_DIR = environ.Path(__file__) - 3  # (project/config/settings/common.py - 3 
 APPS_DIR = ROOT_DIR.path('project')
 
 env = environ.Env()
-# .env file, should load only in development environment
+
 READ_DOT_ENV_FILE = env.bool('DJANGO_READ_DOT_ENV_FILE', default=False)
 
 if READ_DOT_ENV_FILE:
-    # Operating System Environment variables have precedence over variables defined in the .env file,
-    # that is to say variables from the .env files will only be used if not defined
-    # as environment variables.
     env_file = str(ROOT_DIR.path('.env'))
     print('Loading : {}'.format(env_file))
     env.read_env(env_file)
@@ -188,6 +185,12 @@ ACCOUNT_UNIQUE_EMAIL = True
 
 REST_USE_JWT = True
 OLD_PASSWORD_FIELD_ENABLED = True
+
+# Email Settings
+DEFAULT_FROM_EMAIL = 'djstein@ncsu.edu'
+ACCOUNT_EMAIL_SUBJECT_PREFIX = '[Modern Project] '
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+# TURN ON WHEN SSL SET UP ACCOUNT_DEFAULT_HTTP_PROTOCOL = True
 
 JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=300)
