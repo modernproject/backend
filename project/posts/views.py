@@ -4,14 +4,13 @@ from rest_framework.permissions import IsAdminUser, IsAuthenticatedOrReadOnly, A
 
 from project.posts.models import Post
 from project.posts.serializers import PostSerializer, PostListSerializer
-
+from project.posts.permissions import IsAvailableArticle
 
 class PostViewSet(ModelViewSet):
     """
     A simple ViewSet for viewing and editing posts.
     """
     queryset = Post.objects.all()
-    # serializer_class = PostSerializer
 
     def get_permissions(self):
         """
@@ -19,9 +18,10 @@ class PostViewSet(ModelViewSet):
         """
         if self.action is 'list':
             permission_classes = [IsAuthenticatedOrReadOnly]
-            # self.serializer_class = PostListSerializer
         elif self.action is 'metadata':
             permission_classes = [AllowAny]
+        elif self.action is 'retrieve':
+            permission_classes = [IsAvailableArticle]
         else:
             permission_classes = [IsAdminUser]
         return [permission() for permission in permission_classes]

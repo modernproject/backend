@@ -18,6 +18,7 @@ class Post(models.Model):
     category = models.CharField(max_length=50, choices=POST_CATEGORY, default=BACKEND)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    premium = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
