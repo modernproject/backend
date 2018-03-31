@@ -1,8 +1,11 @@
 FROM python:latest
 
+RUN set -ex && pip install pipenv --upgrade
+
 ENV PYTHONUNBUFFERED 1
 
-RUN mkdir /backend
+RUN set -ex && mkdir /backend
 ADD . /backend
+WORKDIR /backend
 
-RUN pip install -Ur /backend/requirements/local.txt
+RUN set -ex && pipenv install --deploy --system
