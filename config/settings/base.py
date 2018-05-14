@@ -17,16 +17,16 @@ APPS_DIR = ROOT_DIR.path('project')
 
 env = environ.Env()
 
-READ_DOT_ENV_FILE = env.bool('DJANGO_READ_DOT_ENV_FILE', default=False)
+# READ_DOT_ENV_FILE = env.bool('DJANGO_READ_DOT_ENV_FILE', default=False)
 
-if READ_DOT_ENV_FILE:
-    env_file = str(ROOT_DIR.path('.env'))
-    print('Loading : {}'.format(env_file))
-    env.read_env(env_file)
-    print('The .env file has been loaded.')
+# if READ_DOT_ENV_FILE:
+#     env_file = str(ROOT_DIR.path('.env'))
+#     print('Loading : {}'.format(env_file))
+#     env.read_env(env_file)
+#     print('The .env file has been loaded.')
 
 
-DEBUG = env.bool('DJANGO_DEBUG', default=False)
+# DEBUG = env.bool('DJANGO_DEBUG', default=False)
 
 # Application definition
 
@@ -48,6 +48,7 @@ THIRD_PARTY_APPS = (
     'allauth',
     'allauth.account',
     'rest_auth.registration',
+    'storages',
 )
 
 LOCAL_APPS = (
@@ -79,7 +80,7 @@ TEMPLATES = [
             str(APPS_DIR.path('templates')),
         ],
         'OPTIONS': {
-            'debug': DEBUG,
+            'debug': False,
             'loaders': [
                 'django.template.loaders.filesystem.Loader',
                 'django.template.loaders.app_directories.Loader',
@@ -104,15 +105,15 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env.str('POSTGRES_NAME'),
-        'USER': env.str('POSTGRES_USER'),
-        'HOST': env.str('POSTGRES_HOST'),
-        'PORT': env.int('POSTGRES_PORT'),
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': env.str('POSTGRES_NAME'),
+#         'USER': env.str('POSTGRES_USER'),
+#         'HOST': env.str('POSTGRES_HOST'),
+#         'PORT': env.int('POSTGRES_PORT'),
+#     }
+# }
 
 
 # Password validation
@@ -208,3 +209,12 @@ JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=3000)
 }
 
+AWS_STORAGE_BUCKET_NAME = 'modernproject-zappa-static'
+
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+
+STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_AUTO_CREATE_BUCKET = True

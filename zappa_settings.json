@@ -1,0 +1,10 @@
+{
+    "dev": {
+        "aws_region": "us-east-1",
+        "django_settings": "config.settings.production",
+        "profile_name": "default",
+        "project_name": "task",
+        "runtime": "python3.6",
+        "s3_bucket": "modernproject-zappa"
+    }
+}

@@ -1,11 +1,10 @@
-FROM python:latest
+FROM lambci/lambda:build-python3.6
 
 RUN set -ex && pip install pipenv --upgrade
 
 ENV PYTHONUNBUFFERED 1
 
-RUN set -ex && mkdir /backend
-ADD . /backend
-WORKDIR /backend
+ADD . /var/task
+WORKDIR /var/task
 
 RUN set -ex && pipenv install --deploy --system

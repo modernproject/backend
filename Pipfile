@@ -4,16 +4,17 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-coreapi-cli = "==1.0.9"
-Django = "==2.0.3"
-django-allauth = "==0.35.0"
-django-cors-headers = "==2.2.0"
-django-environ = "==0.4.4"
-django-rest-auth = "==0.9.3"
-djangorestframework = "==3.7.7"
-djangorestframework-jwt = "==1.11.0"
-gunicorn = "==19.7.1"
-"psycopg2" = "==2.7.4"
+coreapi-cli= "*"
+Django = "*"
+django-allauth = "*"
+django-cors-headers = "*"
+django-environ = "*"
+django-rest-auth = "*"
+django-storages = "*"
+djangorestframework = "*"
+djangorestframework-jwt = "*"
+"psycopg2" = "*"
+zappa = "*"
 
 [dev-packages]
 
