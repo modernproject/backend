@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "d8aaffbe1061f23c1ab09c979b186c0ab523d2f4fb55a2526e39611a80ea0819"
+            "sha256": "f70dedb306f4bb8b5bb294375c4cdbac48edb7594d88dcf628e246a02308bbd3"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -16,6 +16,10 @@
         ]
     },
     "default": {
+        "29f718d": {
+            "editable": true,
+            "path": "./../django-rest-framework-passwordless"
+        },
         "argcomplete": {
             "hashes": [
                 "sha256:74e34bbd5bcb902e67a39e2edf1b1ef3dcb504a6a1d4cd23ce3949f25c4aad55",
@@ -32,17 +36,17 @@
         },
         "boto3": {
             "hashes": [
-                "sha256:2caf6b41808974888264f15aaa5756b47cc7d059acf894809d7619cd0f52f5f8",
-                "sha256:ea61171b4c01eeca1be741cb5e0ac3069a5f4494fd0cf33d77e5a2787f806a31"
+                "sha256:00ddf312a90cf22858a04d3c6244f8edb7ab54d032712887065dc67ef2086c9f",
+                "sha256:320c10fd451c22dcf52123bc93719919ca2632f5d5b26bcf85fc31361a70b55d"
             ],
-            "version": "==1.7.20"
+            "version": "==1.7.21"
         },
         "botocore": {
             "hashes": [
-                "sha256:4a06f58bf2971e97af619b748562296b67594ceff13ff793cd043e74a6f7bfa5",
-                "sha256:9f30ec19e7f6cbe2e35bac439c59200bcc97da0e662d31d9a369d6abf1002b09"
+                "sha256:be3e7067912342b4af144afd720d16cf5a0f24d773e202695dffaca96ab11d04",
+                "sha256:c4e4f35d955bacdb98e220a7dcf457f0f32cf42ada36f67fe7e4bb8a639e225e"
             ],
-            "version": "==1.10.20"
+            "version": "==1.10.21"
         },
         "certifi": {
             "hashes": [
@@ -168,14 +172,6 @@
                 "sha256:7a4bd47eaf6596e1295ecb11361139febe29b084a87bf005bf899f9a42edc3c6"
             ],
             "version": "==0.14"
-        },
-        "drfpasswordless": {
-            "hashes": [
-                "sha256:90ec1e8074704d30d83a417981b038bcc7d0d09b7cbbc8ad5a091b97ca47b8c0",
-                "sha256:e3679c92c35f582f60f0df75fda797acf97dd933c3c6a69a0475825527e41716"
-            ],
-            "index": "pypi",
-            "version": "==1.1.5"
         },
         "durationpy": {
             "hashes": [

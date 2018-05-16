@@ -16,6 +16,7 @@ djangorestframework-jwt = "*"
 "psycopg2" = "*"
 zappa = "*"
 drfpasswordless = "*"
+"29f718d" = {path = "./../django-rest-framework-passwordless", editable = true}
 
 [dev-packages]
 
