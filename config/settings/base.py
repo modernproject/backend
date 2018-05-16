@@ -17,16 +17,16 @@ APPS_DIR = ROOT_DIR.path('project')
 
 env = environ.Env()
 
-# READ_DOT_ENV_FILE = env.bool('DJANGO_READ_DOT_ENV_FILE', default=False)
+READ_DOT_ENV_FILE = env.bool('DJANGO_READ_DOT_ENV_FILE', default=False)
 
-# if READ_DOT_ENV_FILE:
-#     env_file = str(ROOT_DIR.path('.env'))
-#     print('Loading : {}'.format(env_file))
-#     env.read_env(env_file)
-#     print('The .env file has been loaded.')
+if READ_DOT_ENV_FILE:
+    env_file = str(ROOT_DIR.path('.env'))
+    print('Loading : {}'.format(env_file))
+    env.read_env(env_file)
+    print('The .env file has been loaded.')
 
 
-# DEBUG = env.bool('DJANGO_DEBUG', default=False)
+DEBUG = env.bool('DJANGO_DEBUG', default=False)
 
 # Application definition
 
@@ -49,6 +49,7 @@ THIRD_PARTY_APPS = (
     'allauth.account',
     'rest_auth.registration',
     'storages',
+    'drfpasswordless',
 )
 
 LOCAL_APPS = (
@@ -105,15 +106,15 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': env.str('POSTGRES_NAME'),
-#         'USER': env.str('POSTGRES_USER'),
-#         'HOST': env.str('POSTGRES_HOST'),
-#         'PORT': env.int('POSTGRES_PORT'),
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': env.str('POSTGRES_NAME', 'postgres'),
+        'USER': env.str('POSTGRES_USER', 'postgres'),
+        # 'HOST': env.str('POSTGRES_HOST', 'postgres'),
+        'PORT': env.int('POSTGRES_PORT', '5432'),
+    }
+}
 
 
 # Password validation
@@ -150,8 +151,6 @@ USE_TZ = True
 
 SITE_ID = 1
 
-STATIC_URL = '/static/'
-
 STATIC_ROOT = str(ROOT_DIR('static'))
 
 STATICFILES_DIRS = (
@@ -169,14 +168,14 @@ MEDIA_ROOT = str(APPS_DIR('media'))
 
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': (
-        'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
+        'rest_framework.renderers.JSONRenderer',
     ),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ),
     'DEFAULT_METADATA_CLASS': 'rest_framework.metadata.SimpleMetadata'
@@ -196,7 +195,6 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_UNIQUE_EMAIL = True
 
-REST_USE_JWT = True
 OLD_PASSWORD_FIELD_ENABLED = True
 
 # Email Settings
@@ -205,16 +203,15 @@ ACCOUNT_EMAIL_SUBJECT_PREFIX = '[Modern Project] '
 ACCOUNT_EMAIL_VERIFICATION = 'optional'
 # TURN ON WHEN SSL SET UP ACCOUNT_DEFAULT_HTTP_PROTOCOL = True
 
-JWT_AUTH = {
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=3000)
-}
-
 AWS_STORAGE_BUCKET_NAME = 'modernproject-zappa-static'
 
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 
-STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
-
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 AWS_AUTO_CREATE_BUCKET = True
+
+PASSWORDLESS_AUTH = {
+    'PASSWORDLESS_EMAIL_NOREPLY_ADDRESS': 'djstein@ncsu.edu',
+    'PASSWORDLESS_AUTH_TYPES': ['EMAIL'],
+}

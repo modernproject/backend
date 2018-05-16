@@ -15,6 +15,7 @@ djangorestframework = "*"
 djangorestframework-jwt = "*"
 "psycopg2" = "*"
 zappa = "*"
+drfpasswordless = "*"
 
 [dev-packages]
 
